@@ -1,3 +1,8 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "eslint.enable": false,
+    "javascript.autoClosingTags": false,
+    "javascript.format.enable": false,
+    "javascript.format.insertSpaceAfterCommaDelimiter": false,
+    "scss.validate": false
 }

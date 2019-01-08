@@ -2,35 +2,35 @@
 
 [![npm version](https://img.shields.io/npm/v/dragact.svg)](https://www.npmjs.com/package/dragact) [![npm downloads](https://img.shields.io/npm/dm/dragact.svg)](https://www.npmjs.com/package/dragact)
 
-Dragact 是一款 React 组件，他能够使你简单、快速的构建出一款强大的 **拖拽式网格(grid)布局**.
+Dragact is a React component that allows you to easily and quickly build a powerful ** drag-and-drop grid layout**.
 
 ![](https://github.com/215566435/Dragact/blob/master/static/image/dashboard.gif?raw=true)
 
-# Demo 地址 ✌️
+# Demo Site
 
-[Live Demo(预览地址)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-layout/blob/master/build/index.html)
+[Live Demo(Preview address)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-layout/blob/master/build/index.html)
 
-# 特点
+# Features
 
--   [x] 自动布局的网格系统
--   [x] 手机上也可以操作
--   [x] 高度自适应
--   [x] 静态组件
--   [x] 拖拽组件
--   [x] 自动缩放组件
--   [x] 自定义拖拽把手
--   [x] 自定义缩放把手
--   [x] 响应式布局
+- [x] Automatic layout of the grid system
+- [x] can also be operated on the phone
+- [x] Highly adaptive
+- [x] static component
+- [x] drag component
+- [x] auto-scaling component
+- [x] Custom drag handle
+- [x] Custom Zoom Handle
+- [x] responsive layout
 
 <br/>
 
-# 快速开始
+# Quick start
 
 ```bash
 npm install --save dragact
 ```
 
-### 最简单的例子 🌰
+### The simplest example 🌰
 
 ```javascript
 //index.js
@@ -53,13 +53,13 @@ const getblockStyle = isDragging => {
 
 ReactDOM.render(
     <Dragact
-        layout={fakeData} //必填项
-        col={16} //必填项
-        width={800} //必填项
-        rowHeight={40} //必填项
-        margin={[5, 5]} //必填项
-        className="plant-layout" //必填项
-        style={{ background: '#333' }} //非必填项
+        layout={fakeData} //Required field
+        col={16} //Required field
+        width={800} //Required field
+        rowHeight={40} //Required field
+        margin={[5, 5]} //Required field
+        className="plant-layout" //Required field
+        style={{ background: '#333' }} //non-Required field
         placeholder={true}
     >
         {(item, provided) => {
@@ -72,7 +72,7 @@ ReactDOM.render(
                         ...getblockStyle(provided.isDragging)
                     }}
                 >
-                    {provided.isDragging ? '正在抓取' : '停放'}
+                    {provided.isDragging ? 'Grabbing' : 'park'}
                 </div>
             )
         }}
@@ -81,11 +81,11 @@ ReactDOM.render(
 )
 ```
 
-# 组件设计哲学
+# Component design philosophy
 
-### 1.依赖注入式的挂件(widget)
+### 1.Dependent injection pendant(widget)
 
-可以从最简单的例子看出，我们渲染子组件的方式和以往有些不同。以往的 React 组件书写方式，采用的是类似以下写法：
+As you can see from the simplest example, the way we render subcomponents is a bit different. In the past, the React component was written in a similar way to the following:
 
 ```jsx
     <Dragact
@@ -101,17 +101,17 @@ ReactDOM.render(
     </Dragact>,
 ```
 
-这么做当然可以，但是有几个问题：
+This can be done of course, but there are a few questions:
 
--   子组件非常的丑，需要我们定义一大堆东西
--   很难监听到子组件的事件，比如是否拖拽等
--   如果有大量的数据时，就必须写对数组写一个 map 函数，类似:`layout.map(item=>item);` 来帮助渲染数组
+- Subcomponents are very ugly, we need to define a lot of things
+- It's hard to listen to subcomponent events, such as drag and drop, etc.
+- If there is a large amount of data, you must write a map function on the array, similar to: `layout.map(item=>item);` to help render the array
 
-为了解决这个问题，我将子组件的渲染方式进行高度抽象成为一个**构造器**，简单来说就是以下的形式：
+To solve this problem, I highly abstract the rendering of the subcomponent into a **constructor**, which is simply the following form:
 
 ```jsx
     <Dragact
-        layout={fakeData}//必填项
+        layout={fakeData}//Required field
         {...something}
     >
         {(item, provided) => {
@@ -124,72 +124,72 @@ ReactDOM.render(
                         ...getblockStyle(provided.isDragging)
                     }}
                 >
-                    {provided.isDragging ? '正在抓取' : '停放'}
+                    {provided.isDragging ? 'Grabbing' : 'park'}
                 </div>
             )
         }}
     </Dragact>,
 ```
 
-现在，我们子元素渲染变成一个小小的**构造函数**，第一个入参是您输入数据的每一项，第二个参数就是**provided**，提供了所有的拖拽属性。
+Now, our child element rendering becomes a small ** constructor**, the first input parameter is each item of your input data, and the second parameter is **provided**, which provides all the drag and drop. Attributes.
 
-这么做，轻易的实现了，减少组件层级，组件漂亮，不用写 map 函数，不用写 key，同时更容易监听每一个组件的拖拽状态**provided.isDragging**.
+This is done easily, reducing the component hierarchy, the components are beautiful, you don't have to write the map function, you don't have to write the key, and it's easier to listen to the drag state of each component **provided.isDragging**.
 
-更多的依赖注入思想以及好处，请看我的知乎问答：[知乎，方正的回答：如何设计一款组件库](https://www.zhihu.com/question/266745124/answer/322998960)
+For more reliance on injection ideas and benefits, please see my knowledge and answer: [Know, Founder's answer: how to design a component library] (https://www.zhihu.com/question/266745124/answer/322998960 )
 
-### 2.流畅的组件滑动
+### 2. Smooth component sliding
 
-为了保证拖拽时候的手感舒适，我通过设置元素的 translate(x,y)来进行实现，并且配合 CSS 动画，使得每一步的移动都是那么的顺畅。
+In order to ensure the comfort of dragging, I implemented the element's translate(x,y), and with CSS animation, the movement of each step is so smooth.
 
-你能够很轻易的看到每一个组件到底滑向哪里，到底坐落在哪里。
+You can easily see where each component slips and where it is located.
 
-### 3.数据驱动的模式
+### 3.Data Driven Mode
 
-> 视图的改变就是数据的改变
+> View changes are data changes
 
-这是 React 给我们的一个启示，Dragact 组件通过对数据的处理，达到了数据变化即视图变化。
+This is a revelation from React. The Dragact component achieves data changes, ie view changes, by processing the data.
 
-这么做的好处就是我们可以轻松的**将布局信息记录在服务器的数据库中**，下一次拿到数据的时候，就可以轻松的**恢复原来的视图位置**。
+The advantage of this is that we can easily record the layout information in the server's database**, the next time you get the data, you can easily restore the original view location**.
 
-通过获取 dragact 组件的实例，我提供了一个 api `getLayout():DragactLayout;`，用于获取当前的**布局信息**。
+By getting an instance of the dragact component, I provide an api `getLayout():DragactLayout;` to get the current **layout information**.
 
-### 4.滑动中心
+### 4. Sliding center
 
-经过不断的努力和尝试，现在所有的 widget 移动都是依赖重力中心去移动的。
+After constant efforts and attempts, all widget movements now rely on the gravity center to move.
 
-这意味着当我们拖动一个 widget 的时候更加得心应手和自然。
+This means that when we drag a widget, it's more handy and natural.
 
-看看`dragact`优化前是怎样的
+See what the `dragact` is before optimization.
 
-![非常长的一条块，已经拖动超出了屏幕很多才会交换方块](https://pic2.zhimg.com/v2-9180ee016a4d01834565de5c126263c1_b.gif)
+![A very long block that has been dragged beyond the screen to exchange blocks] (https://pic2.zhimg.com/v2-9180ee016a4d01834565de5c126263c1_b.gif)
 
-再看看优化以后的`dragact`是怎样的体验
+Let’s look at the experience of `dragact` after optimization.
 
-![当长方条的中心，超过下面方块的中心的时候，就会发生移动](https://pic3.zhimg.com/v2-0f6ac6fe7b7980ad07b9af78625fca4d_b.gif)
+![When the center of the long square bar exceeds the center of the square below, it will move] (https://pic3.zhimg.com/v2-0f6ac6fe7b7980ad07b9af78625fca4d_b.gif)
 
-这样的一种优化，带来的是拖动手感的差异，我们向下拖动物块的目的，很大程度上是因为想和下方的某一物块交换位置。
+Such an optimization brings about the difference in drag feel. The purpose of dragging the block down is largely because I want to swap the position with a block below.
 
-通过这种趋势的判断和大量实验，`dragact`选择了重力中心为移动点，更自然，手感更顺滑.
+Through this trend of judgment and a large number of experiments, `dragact` chose the center of gravity as the moving point, which is more natural and feels smoother.
 
-### 5.性能优异
+### 5. Excellent performance
 
-让我们用直观的动图来观看性能吧！
+Let's watch performance with intuitive animations!
 
 ![](https://pic3.zhimg.com/v2-3a9a1c2894ccbf4bbf791b9aa82912b2_b.gif)
 
-这是一条超过 300 行的大量数据，在优化前，我们可以看到，会有明显的卡顿。
+This is a large amount of data over 300 lines. Before optimization, we can see that there will be obvious stuck.
 
 ![](https://pic3.zhimg.com/v2-4d11298ef72730d686172a149f1f135d_b.gif)
 
-用过 react 组件的优化后，依旧是一条超过 300 行的大量数据。
+After using the optimization of the react component, it is still a large amount of data of more than 300 lines.
 
-可以看到组件插入速度的明显的变化。
+A noticeable change in the insertion speed of the component can be seen.
 
-# Dragact 提供的属性
+# Dragact Provided properties
 
-### 数据属性
+### Data Attributes
 
-数据属性指的是我们每一个组件所拥有的属性,类似以下的一组数据
+Data attributes refer to the attributes owned by each of our components, a set of data similar to the following
 
 ```ts
 const layout = [
@@ -198,77 +198,77 @@ const layout = [
     { GridX: 0, GridY: 0, w: 4, h: 2, key: '2' }
 ]
 
-GridX: number //必填，挂件布局中的横坐标
-GridY: number //必填，挂件布局中的纵坐标
-w: number //必填，挂件布局中宽度，整数
-h: number //必填，挂件布局中高度，整数
-key: number | string //必填，挂件在布局中的唯一id
+GridX: number //Required, the abscissa in the layout of the pendant
+GridY: number //Required, ordinate in the layout of the pendant
+w: number //required, width in the layout of the pendant, integer
+h: number //required, height in the layout of the pendant, integer
+Key: number | string //Required, the unique id of the pendant in the layout
 ```
 
 
-### 组件属性
+### Component Attributes
 ```ts
 export interface DragactProps {
     layout: DragactLayoutItem[]
     /**
-     * 宽度切分比
-     * 这个参数会把容器的宽度平均分为col等份
-     * 于是容器内元素的最小宽度就等于 containerWidth/col
-    */
-    col: number,
+     * Width division ratio
+     * This parameter will divide the width of the container into col equal parts.
+     * Then the minimum width of the elements in the container is equal to containerWidth / col
+    */
+    Col: number,
 
-    /**
-     * 容器的宽度
-    */
-    width: number,
+    /**
+     * The width of the container
+    */
+    Width: number,
 
-    /**容器内每个元素的最小高度 */
-    rowHeight: number,
+    /**The minimum height of each element in the container */
+    rowHeight: number,
 
-    /**
-     * 容器内部的padding
-     */
+    /**
+     * padding inside the container
+     */
     padding?: number,
 
     children: (Item: DragactLayoutItem, provided: GridItemProvided) => any,
 
 
-    //
-    // interface GridItemEvent {
-    //     event: any //浏览器拖动事件
-    //     GridX: number //在布局中的x格子  
-    //     GridY: number //在布局中的y格子  
-    //     w: number //元素的宽度
-    //     h: number //元素的高度
-    //     UniqueKey: string | number //元素的唯一key
-    // }
+//
+    // interface GridItemEvent {
+    // event: any //browser drag event
+    // GridX: number //x grid in the layout
+    // GridY: number // y grid in the layout
+    // w: number // the width of the element
+    // h: number //the height of the element
+    // UniqueKey: string | number // the unique key of the element
+    // }
 
     /**
-     * 拖动开始的回调
+     * Drag the start of the callback
      */
     onDragStart?: (event: GridItemEvent) => void
 
     /**
-     * 拖动中的回调
+     * Drag in the drag
      */
     onDrag?: (event: GridItemEvent) => void
 
     /**
-     * 拖动结束的回调
+     * Drag the end of the callback
      */
     onDragEnd?: (event: GridItemEvent) => void
 
     /**
-     * 每个元素的margin,第一个参数是左右，第二个参数是上下
+     * The margin of each element, the first parameter is left and right, the second parameter is up and down
      */
     margin: [number, number]
 
     /**
-     * layout的名字
+     * Layout name
     */
     className: number | string
 
-    /**是否有placeholder */
+    /** Is there a placeholder */
     placeholder?: Boolean
 
     style?: React.CSSProperties
@@ -278,11 +278,11 @@ export interface DragactProps {
 ```
 # Ref Api
 
-获取到组件的 ref，就可以使用其 api
+Get the ref of the component, you can use its api
 
 ```ts
 /*
-返回当前的layout.
+Returns the current layout.
 */
 getLayout():DragactLayout;
 ```
@@ -295,17 +295,16 @@ cd Dragact
 npm install
 npm run test
 ```
+# Contribution
 
-# 贡献
+### Want a new feature, function?
 
-### 想要一个新的特色、功能？
+1. If you want to add some new features or some great ideas, please send an issue to tell me, thank you!
+2. If you have already read the source code and added some very good ideas, please start your PR.
 
-1.  如果你想添加一些新功能或者一些非常棒的点子，请发起 issue 告诉我，谢谢！
-2.  如果你已经阅读过源代码，并且添加了一些非常牛 X🐂 的点子，请发起你的 PR.
+### Have a bug?
 
-### 有 bug?
-
-如果你发现了本项目的 Bug，请务必马上告诉我。添加一个 issue，并且帮忙给出最最简单重现的例子，这能让我快速定位到 Bug 帮你解决，谢谢！
+If you find a bug in this project, please let me know immediately. Add an issue and help give the most simple and reproducible example, which will allow me to quickly locate the bug to help you solve it, thank you!
 
 # LICENSE
 

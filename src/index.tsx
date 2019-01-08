@@ -44,13 +44,13 @@ class DemoDispatcher extends React.Component<{}, {}> {
                     frameBorder="0" scrolling="0" width="158px" height="30px"></iframe>
                 <div>切换 Demos</div>
                 <div className='demo-button-layout'>
-                    <button onClick={() => this.handleLayoutChange('normalLayout')}>普通布局</button>
-                    <button onClick={() => this.handleLayoutChange('StaticHeader')}>静态组件</button>
-                    <button onClick={() => this.handleLayoutChange('LayoutRestore')}>存储布局</button>
-                    <button onClick={() => this.handleLayoutChange('HistoryLayout')}>记忆操作布局</button>
-                    <button onClick={() => this.handleLayoutChange('HandleLayout')}>拖拽把手</button>
-                    <button onClick={() => this.handleLayoutChange('AddRemove')}>增加和删除</button>
-                    <button onClick={() => this.handleLayoutChange('Mobile')}>移动端</button>
+                    <button onClick={() => this.handleLayoutChange('normalLayout')}>Ordinary layout</button>
+                    <button onClick={() => this.handleLayoutChange('StaticHeader')}>Static component</button>
+                    <button onClick={() => this.handleLayoutChange('LayoutRestore')}>Storage layout</button>
+                    <button onClick={() => this.handleLayoutChange('HistoryLayout')}>Memory operation layout</button>
+                    <button onClick={() => this.handleLayoutChange('HandleLayout')}>Drag handle</button>
+                    <button onClick={() => this.handleLayoutChange('AddRemove')}>Add and delete</button>
+                    <button onClick={() => this.handleLayoutChange('Mobile')}>Mobile end</button>
                 </div>
                 {this.state.demo}
             </div>
@@ -84,21 +84,21 @@ class DemoDispatcher extends React.Component<{}, {}> {
 //                 textAlign: 'center'
 //             }}
 //         >
-//             点击拖拽
+//             Click to drag
 //         </div>
 //     )
 // }
 
 // ReactDOM.render(
 //     <Dragact
-//         layout={fakeData}//必填项
-//         col={16}//必填项
-//         width={800}//必填项
-//         rowHeight={40}//必填项
-//         margin={[5, 5]}//必填项
-//         className='plant-layout'//必填项
-//         style={{ background: '#333' }}//非必填项
-//         placeholder={true}//非必填项
+//         layout={fakeData}//Required field
+//         col={16}//Required field
+//         width={800}//Required field
+//         rowHeight={40}//Required field
+//         margin={[5, 5]}//Required field
+//         className='plant-layout'//Required field
+//         style={{ background: '#333' }}//non-Required field
+//         placeholder={true}//non-Required field
 //     >
 //         {(item: any, provided: any) => {
 //             return (
@@ -107,7 +107,7 @@ class DemoDispatcher extends React.Component<{}, {}> {
 //                     style={{ ...provided.props.style, background: 'white' }}
 //                 >
 //                     <Handle provided={provided} />
-//                     {provided.isDragging ? '正在抓取' : '停放'}
+//                     {provided.isDragging ? 'Crawling' : 'park'}
 //                 </div>
 //             )
 //         }}

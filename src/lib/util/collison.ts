@@ -14,7 +14,7 @@ export const collision = (a: DragactLayoutItem, b: DragactLayoutItem) => {
 }
 
 
-/**获取layout中，item第一个碰撞到的物体 */
+/**Get the first object collided by item in the layout */
 export const getFirstCollison = (layout: DragactLayoutItem[], item: DragactLayoutItem) => {
 
     for (let i = 0, length = layout.length; i < length; i++) {

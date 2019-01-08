@@ -128,7 +128,7 @@ export class Dragact extends React.Component<DragactProps, DragactState> {
             this.state.layout,
             layoutItem,
             UniqueKey + '',
-            UniqueKey + '' /*用户移动方块的key */,
+            UniqueKey + '' /* User moves the box's key */,
             moving
         )
         const { compacted, mapLayout } = compactLayout(

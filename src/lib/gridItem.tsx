@@ -4,22 +4,22 @@ import { checkInContainer } from './util/correction';
 import { Bound } from './utils';
 
 export interface GridItemProps {
-    /**外部容器属性 */
+    /**External container properties */
     col: number,
     containerWidth: number,
     containerPadding: [number, number],
 
-    /**子元素的属性 */
+    /**Child element attributes */
     margin?: [number, number],
     GridX: number,
     GridY: number,
     rowHeight: number,
 
-    /**子元素的宽高 */
+    /** child element width and height */
     w: number,
     h: number,
 
-    /**生命周期回掉函数 */
+    /** life cycle back function */
     onDragStart?: (event: GridItemEvent) => void,
     onDragEnd?: (event: GridItemEvent) => void,
     onDrag?: (event: GridItemEvent) => void
@@ -62,7 +62,7 @@ export interface GridItemEvent {
 const checkWidthHeight = (GridX: number, w: number, h: number, col: number) => {
     var newW = w;
     var newH = h;
-    if (GridX + w > col - 1) newW = col - GridX //右边界
+    if (GridX + w > col - 1) newW = col - GridX //Right border
     if (w < 1) newW = 1;
     if (h < 1) newH = 1;
     return {
@@ -92,7 +92,7 @@ export default class GridItem extends React.Component<GridItemProps, {}> {
         h: 1
     }
 
-    /** 计算容器的每一个格子多大 */
+    /** Calculate how big each grid of the container is */
     calColWidth() {
         const { containerWidth, col, containerPadding, margin } = this.props;
 
@@ -102,20 +102,20 @@ export default class GridItem extends React.Component<GridItemProps, {}> {
         return (containerWidth - containerPadding[0] * 2 - 0 * (col + 1)) / col
     }
 
-    /**转化，计算网格的GridX,GridY值 */
+    /** conversion, calculate grid GridX, GridY value */
     calGridXY(x: number, y: number) {
         const { margin, containerWidth, col, w, rowHeight } = this.props
 
-        /**坐标转换成格子的时候，无须计算margin */
+        /** coordinates are converted to a grid, no need to calculate margin */
         let GridX = Math.round(x / containerWidth * col)
         let GridY = Math.round(y / (rowHeight + (margin ? margin[1] : 0)))
 
-        // /**防止元素出container */
+        // /** Prevent elements from being out of container */
         return checkInContainer(GridX, GridY, col, w)
     }
 
 
-    /**给予一个grid的位置，算出元素具体的在容器中位置在哪里，单位是px */
+    /** Give a grid location and figure out where the element is in the container, in px */
     calGridItemPosition(GridX: number, GridY: number) {
         var { margin, rowHeight } = this.props
 
@@ -152,7 +152,7 @@ export default class GridItem extends React.Component<GridItemProps, {}> {
         //     this.props.rowHeight !== props.rowHeight
     }
 
-    /**宽和高计算成为px */
+    /**Width and height calculations become px */
     calWHtoPx(w: number, h: number) {
         var { margin } = this.props
 
